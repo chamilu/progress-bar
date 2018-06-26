@@ -1,6 +1,12 @@
-@import 'bootstrap-sprockets';
-@import 'bootstrap';
-
 body {
     font-family: 'Roboto', sans-serif;
+}
+
+select {
+    padding: 5px;
+}
+
+.change-btn {
+    width: 40px;
+    margin-left: 10px;
 }

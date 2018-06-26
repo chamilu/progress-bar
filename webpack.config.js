@@ -21,7 +21,8 @@ module.exports = {
                     {
                         loader: 'babel-loader',
                         options: {
-                            presets: ['env', 'react'],
+                            presets: ['stage-1', 'env', 'react'],
+                            plugins: ['transform-class-properties'],
                         },
                     },
                 ],
@@ -35,4 +36,8 @@ module.exports = {
         ],
     },
     plugins: [extractTextPlugin],
+    devServer: {
+        port: 3000,
+        contentBase: './public',
+    },
 };
