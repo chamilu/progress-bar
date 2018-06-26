@@ -5,8 +5,7 @@ import axios from 'axios';
 
 import ProgressBarList from './ProgressBarList';
 import ButtonList from './ButtonList';
-
-// const data = { buttons: [40, 8, -28, -30], bars: [70, 80, 86], limit: 110 };
+import Loader from './Loader';
 
 export default class App extends Component {
     state = {
@@ -18,7 +17,6 @@ export default class App extends Component {
     componentDidMount() {
         axios.get('http://pb-api.herokuapp.com/bars').then(
             response => {
-                console.log(response);
                 this.setState(prevState => ({
                     ...prevState,
                     barList: response.data.bars,
@@ -42,8 +40,9 @@ export default class App extends Component {
     };
 
     render() {
-        return this.state.barList ? (
+        return this.state.data ? (
             <div style={{ width: 400, margin: '0 auto', marginTop: 40 }}>
+                <h1 className="title">Progress Bar</h1>
                 <ProgressBarList
                     bars={this.state.barList}
                     limit={this.state.limit}
@@ -56,7 +55,7 @@ export default class App extends Component {
                 </div>
             </div>
         ) : (
-            <div>Loading...</div>
+            <Loader />
         );
     }
 }
