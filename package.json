@@ -6,7 +6,8 @@
     "author": "Chamil Udayanga <chamiludayanga28@gmail.com>",
     "license": "MIT",
     "scripts": {
-        "start": "webpack && node ./src/server/server.js",
+        "build": "webpack",
+        "start": "node ./src/server/server.js",
         "dev": "webpack-dev-server --hot"
     },
     "dependencies": {
