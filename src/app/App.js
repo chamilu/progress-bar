@@ -15,8 +15,7 @@ export default class App extends Component {
     };
 
     componentDidMount() {
-        // axios.get('http://pb-api.herokuapp.com/bars').then(
-        axios.get('/api/bars').then(
+        axios.get('http://pb-api.herokuapp.com/bars').then(
             response => {
                 this.setState(prevState => ({
                     ...prevState,
