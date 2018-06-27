@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 const barStyle = {
     width: '100%',
@@ -22,16 +23,19 @@ const labelStyle = {
 
 const innerBarStyle = {
     height: 46,
-    WebkitTransition: `width 0.3s` /* Safari */,
+    WebkitTransition: 'width 0.3s',
     transition: 'width 0.3s',
 };
 
 export default class ProgressBar extends Component {
+    static propTypes = {
+        value: PropTypes.number.isRequired,
+        limit: PropTypes.number.isRequired,
+    };
+
     render() {
-        let barWidth = parseInt(
-            100 * (this.props.value / this.props.limit),
-            10,
-        );
+        const { value, limit } = this.props;
+        let barWidth = parseInt(100 * (value / limit), 10);
         barWidth = barWidth <= 0 ? 0 : barWidth;
 
         return (

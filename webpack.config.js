@@ -1,12 +1,13 @@
 const Path = require('path');
 const ExtractPlugin = require('extract-text-webpack-plugin');
+
 const extractTextPlugin = new ExtractPlugin({
     filename: 'main.css',
 });
 
 module.exports = {
     mode: process.env.NODE_ENV || 'development',
-    entry: Path.resolve(__dirname, './src/app/index.js'),
+    entry: Path.resolve(__dirname, './src/app/index.jsx'),
     output: {
         path: Path.resolve(__dirname, './public/dist'),
         filename: 'bundle.js',
@@ -15,7 +16,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.jsx?$/,
                 exclude: /node_modules/,
                 use: [
                     {
@@ -34,6 +35,9 @@ module.exports = {
                 }),
             },
         ],
+    },
+    resolve: {
+        extensions: ['.js', '.jsx'],
     },
     plugins: [extractTextPlugin],
     devServer: {

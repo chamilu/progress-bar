@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import update from 'immutability-helper';
 import _ from 'lodash';
 import axios from 'axios';
 
@@ -24,15 +23,18 @@ export default class App extends Component {
                     data: response.data,
                 }));
             },
-            error => {
-                console.log('error', error);
+            () => {
+                // used alert for sake of simplicity.
+                alert('Something went wrong. Please try again. !'); //eslint-disable-line
             },
         );
     }
 
     changeBarValue = (barId, changeValue) => {
-        const newArray = _.clone(this.state.barList);
+        const { barList } = this.state;
+        const newArray = _.clone(barList);
         const newValue = newArray[barId] + changeValue;
+
         newArray[barId] = newValue <= 0 ? 0 : newValue;
         this.setState({
             barList: newArray,
@@ -40,16 +42,15 @@ export default class App extends Component {
     };
 
     render() {
-        return this.state.data ? (
+        const { data, barList, limit } = this.state;
+
+        return data ? (
             <div style={{ width: 400, margin: '0 auto', marginTop: 40 }}>
                 <h1 className="title">Progress Bar</h1>
-                <ProgressBarList
-                    bars={this.state.barList}
-                    limit={this.state.limit}
-                />
+                <ProgressBarList bars={barList} limit={limit} />
                 <div style={{ marginTop: 20 }}>
                     <ButtonList
-                        data={this.state.data}
+                        data={data}
                         changeBarValue={this.changeBarValue}
                     />
                 </div>
