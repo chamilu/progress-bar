@@ -2,7 +2,7 @@ const Path = require('path');
 const ExtractPlugin = require('extract-text-webpack-plugin');
 
 const extractTextPlugin = new ExtractPlugin({
-    filename: 'main.css',
+    filename: 'main.min.css',
 });
 
 module.exports = {
@@ -10,7 +10,7 @@ module.exports = {
     entry: Path.resolve(__dirname, './src/app/index.jsx'),
     output: {
         path: Path.resolve(__dirname, './public/dist'),
-        filename: 'bundle.js',
+        filename: 'bundle.min.js',
         publicPath: '/dist',
     },
     module: {
@@ -31,7 +31,10 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: ExtractPlugin.extract({
-                    use: ['css-loader', 'sass-loader'],
+                    use: [
+                        { loader: 'css-loader', options: { minimize: true } },
+                        'sass-loader',
+                    ],
                 }),
             },
         ],
@@ -40,6 +43,9 @@ module.exports = {
         extensions: ['.js', '.jsx'],
     },
     plugins: [extractTextPlugin],
+    optimization: {
+        minimize: true,
+    },
     devServer: {
         port: 3000,
         contentBase: './public',
