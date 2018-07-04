@@ -36,6 +36,7 @@ export default class App extends Component {
         const newValue = newArray[barId] + changeValue;
 
         newArray[barId] = newValue <= 0 ? 0 : newValue;
+
         this.setState({
             barList: newArray,
         });
@@ -47,7 +48,9 @@ export default class App extends Component {
         return data ? (
             <div style={{ width: 400, margin: '0 auto', marginTop: 40 }}>
                 <h1 className="title">Progress Bar</h1>
+
                 <ProgressBarList bars={barList} limit={limit} />
+
                 <div style={{ marginTop: 20 }}>
                     <ButtonList
                         data={data}

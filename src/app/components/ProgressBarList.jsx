@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import shortId from 'shortid';
 
 import ProgressBar from './ProgressBar';
 
 export default class ProgressBarList extends Component {
+    /* eslint react/no-array-index-key:0 */
     static propTypes = {
         bars: PropTypes.arrayOf(PropTypes.number).isRequired,
         limit: PropTypes.number.isRequired,
@@ -13,14 +13,8 @@ export default class ProgressBarList extends Component {
     generateBars = () => {
         const { bars, limit } = this.props;
 
-        // This is used to generate keys for react map.
-        const newBarList = bars.map(value => ({
-            id: shortId.generate(),
-            value,
-        }));
-
-        return newBarList.map(bar => (
-            <ProgressBar key={bar.id} value={bar.value} limit={limit} />
+        return bars.map((value, index) => (
+            <ProgressBar key={index} value={value} limit={limit} />
         ));
     };
 
